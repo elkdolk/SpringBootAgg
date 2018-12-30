@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #9F2B68;">
+			<a class="navbar-brand" href="#"><img th:src="@{/azad3.png}"
+				width="60" height="40" class="d-inline-block align-top" alt="">RSS Reader</a>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item "
+						th:classappend="${view == 'index' ? 'active' : ''}"><a
+						class="nav-link" th:href="@{/}">Home </a></li>
+					<li class="nav-item"
+						th:classappend="${view == 'users' or view == 'userDetail' ? 'active' : ''}">
+						<a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link"
+						th:href="@{/users}">Users</a>
+					<li class="nav-item"
+						th:classappend="${view == 'register' ? 'active' : ''}"><a
+						sec:authorize="! isAuthenticated()" class="nav-link"
+						th:href="@{/register}">Register</a></li>
+					<li class="nav-item"
+						th:classappend="${view == 'login' ? 'active' : ''}"><a
+						sec:authorize="! isAuthenticated()" class="nav-link"
+						th:href="@{/login}">Login</a></li>
+					<li class="nav-item"
+						th:classappend="${view == 'account' ? 'active' : ''}"><a
+						sec:authorize="isAuthenticated()" class="nav-link"
+						th:href="@{/account}">My Account</a></li>
+					<li class="nav-item"
+						th:classappend="${view == 'help' ? 'active' : ''}"><a
+						class="nav-link" th:href="@{/help}">Help</a></li>
+					<li class="nav-item"><a sec:authorize="isAuthenticated()"
+						class="nav-link" th:href="@{/logout}">Logout</a></li>
+				</ul>
+
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

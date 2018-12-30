@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf8">
+</head>
+<body>
+
+	<div th:fragment="content" class="container">
+		<br /> <br /> <br />
+
+		<div th:if="${success}" class="alert alert-success">
+			<h4>Registration successful!</h4>
+		</div>
+
+		<!--   form horizontal   -->
+
+		<form th:action="@{/register}" th:object="${youser}" method="post" id="registerForm">
+			<div class="form-group row ">
+				<label for="name" class="col-sm-2 col-form-label ">Name</label>
+				<div class="col-sm-10">
+					<input type="text" path="name" th:field="*{name}" class="form-control " id="name" placeholder="Name" />
+					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="email" class="col-sm-2 col-form-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" path="email" th:field="*{email}" class="form-control" id="email" placeholder="Email" />
+					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect	email</p>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="password" class="col-sm-2 col-form-label">Password</label>
+				<div class="col-sm-10">
+					<input path="password" type="password" id="password" th:field="*{password}" class="form-control" placeholder="Password" />
+					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</p>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label for="PasswordVerify" class="col-sm-2 col-form-label">verify password </label>
+				<div class="col-sm-10">
+					<input  type="password" name="password_again" class="form-control" id="password_again" placeholder="verify password" />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-10">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+			</div>
+		</form>
+		
+		<script>
+		$(document).ready(function(){
+				$("#registerForm").validate({
+					rules: {
+						name: {
+							required: true,
+							minlength: 3,
+							remote: {
+								url: "/register/alreadyTaken",
+								type: "get",
+								data: {
+									username: function(){
+										return $("#name").val();
+									}
+								}
+							}
+						},
+						email: {
+							required: true,
+							email: true
+						},
+						password: {
+							required: true,
+							minlength: 5
+						},
+						password_again: {
+							required: true,
+							minlength: 5,
+							equalTo: "#password"
+						}
+						
+					},
+					messages: {
+						name: {
+							required: "please enter a name",
+							minlength: "name should be at least 3 characters",
+							remote: "user name already taken...!"
+						},
+						email: {
+							required: "email is required",
+							email: "please enter a valid email"
+						}
+					},
+					
+					highlight: function(element, errorClass, validClass) {
+						$(element).addClass('is-invalid').removeClass('is-valid');
+					},
+					unhighlight: function(element, errorClass, validClass) {
+						$(element).addClass('is-valid').removeClass('is-invalid');
+					}
+					
+				});
+			});
+		</script> 
+	</div>
+</body>
+</html>

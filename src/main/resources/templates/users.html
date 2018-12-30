@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf8">
+</head>
+<body>
+
+	<div th:fragment="content" class="container">
+		<br /> <br /> <br />
+
+		<script>
+			$(document).ready(function() {
+				<!-- JQuery for showing delete confirmation modal  -->
+				$(".triggerRemove").click(function(e){
+ 					e.preventDefault();
+ 					$("#modalRemove .removeBtn").attr("href",$(this).attr("href"));
+ 					$('#modalRemove').modal();
+				});
+			});
+		</script>
+
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>User Name</th>
+					<th>Operations</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td><a th:text="${user.name}" th:href="@{'/users/' + ${user.id}}">name</a></td>
+					<td><a th:href="@{'/users/remove/' + ${user.id} }" class="btn btn-danger triggerRemove">Remove</a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<!-- Second Modal for delete blog confirmation-->
+		
+		<div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Remove user?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body"><span class="alert alert-danger">You are about to delete user...</span></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"	data-dismiss="modal">Cancel</button>
+						<a href="" class="btn btn-danger removeBtn">Remove</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

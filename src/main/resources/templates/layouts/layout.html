@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+		<title>RSS ReaderIV </title>
+	<meta charset="utf-8">
+	<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="/webjars/popper.js/1.13.0/dist/popper.min.js"></script>
+	<script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+	<link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+<body>
+	<div th:replace="fragments/header :: header">Header</div>
+	<div th:replace="${view} :: content">Content</div>
+	<div th:replace="fragments/footer :: footer">Footer</div>
+</body>
+</html>

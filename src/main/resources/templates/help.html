@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf8">
+	<link rel="stylesheet" th:href="@{/app.css}" />
+</head>
+<body>
+	
+	<div th:fragment="content" class="container">
+	<br />
+	<br />
+	<br />
+	
+	<p>This web application is a news aggregator that
+	 draws together syndicated content from various online sources
+	  and displays it in a single location for the user’s convenience</p>
+
+		<ul>
+			<li>Click Register and Create a user name and password</li>
+			<li>Login with your credentials</li>
+			<li>Select My Account and new blog</li>
+			<li>In the modal window select a name for a new blog</li>
+			<li>Enter the URL. For test you can enter following URLs: </li>
+			<li>http://www.eweek.com/rss.xml or https://www.wired.com/feed/rss</li>
+			<li>Press Save button </li>
+		</ul>
+
+	</div>
+</body>
+</html>
